@@ -1,0 +1,22 @@
+[
+    {
+        "label": "ALL",
+        "value": ""
+    },
+    {
+        "label": "DRAFT",
+        "value": "DRAFT"
+    },
+    {
+        "label": "SUBMIT",
+        "value": "SUBMIT"
+    },
+    {
+        "label": "REJECT",
+        "value": "REJECT"
+    },
+    {
+        "label": "CANCEL",
+        "value": "CANCEL"
+    }
+]

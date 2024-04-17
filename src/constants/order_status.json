@@ -1,0 +1,26 @@
+[
+    {
+        "label": "ALL",
+        "value": ""
+    },
+    {
+        "label": "PROCESSING",
+        "value": "processing"
+    },
+    {
+        "label": "PENDING",
+        "value": "pending"
+    },
+    {
+        "label": "FAILED",
+        "value": "failed"
+    },
+    {
+        "label": "SUCCESSED",
+        "value": "successed"
+    },
+    {
+        "label": "CANCLED",
+        "value": "cancled"
+    }
+]
