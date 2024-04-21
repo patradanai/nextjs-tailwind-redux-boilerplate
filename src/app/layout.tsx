@@ -3,13 +3,13 @@ import '@/libs/configs/fontawesome.config'
 
 import React from 'react'
 
-import type { Metadata, Viewport } from 'next'
+import type { Viewport } from 'next'
 import { Sarabun, Kanit } from 'next/font/google'
-import Head from 'next/head'
+import { useMessages, NextIntlClientProvider } from 'next-intl'
 
-import { resourceService } from '@/services/implements'
-import { env } from '@/utils/env'
-import { getRGBColor } from '@/utils/parseColor'
+import { SnackBarProvider } from '@/contexts/snackbar/snackbarContext'
+import { ApolloWrapper } from '@/libs/ApolloWrapper'
+import StoreProvider from '@/libs/ReduxProvider'
 
 const sarabun = Sarabun({
     subsets: ['thai'],
@@ -32,78 +32,66 @@ export const viewport: Viewport = {
     minimumScale: 1,
 }
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
+    params: { locale },
 }: {
     children: React.ReactNode
+    params: { locale: string }
 }) {
-    const data = await resourceService.getResource({
-        id: env.NEXT_PUBLIC_RESOURCE_ID,
-    })
+    const messages = useMessages()
 
     return (
-        <html lang="en">
-            <Head>
-                <link
-                    rel="shortcut icon"
-                    href={data.favicon.url}
-                    sizes="16x16"
-                />
-                <link
-                    rel="apple-touch-icon"
-                    href={data.favicon.url}
-                    sizes="16x16"
-                />
-                <link rel="icon" href={data.favicon.url} sizes="16x16" />
-
-                <style>
-                    :root
-                    {`{${getRGBColor(data.primaryColor.hex, 'primary')} ${getRGBColor(data.secondaryColor.hex, 'secondary')}} `}
-                </style>
-            </Head>
-
+        <html lang={locale}>
             <body className={`${sarabun.variable} ${kanit.variable}`}>
-                {children}
+                <StoreProvider>
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                        <ApolloWrapper>
+                            <SnackBarProvider>{children}</SnackBarProvider>
+                        </ApolloWrapper>
+                    </NextIntlClientProvider>
+                </StoreProvider>
             </body>
         </html>
     )
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const data = await resourceService.getResource({
-        id: env.NEXT_PUBLIC_RESOURCE_ID,
-    })
-
-    const { metaDescription, favicon } = data
-
-    return {
-        icons: {
-            icon: favicon.url,
-            shortcut: favicon.url,
-            apple: favicon.url,
-        },
-        robots: {
-            index: metaDescription.isIndex,
-            follow: metaDescription.isFollow,
-            nocache: true,
-            googleBot: {
-                index: metaDescription.isIndex,
-                follow: metaDescription.isFollow,
-                noimageindex: false,
-            },
-        },
-        title: metaDescription.metaTitle,
-        description: metaDescription.metaDescription,
-        keywords: metaDescription.keywords,
-        openGraph: {
-            title: metaDescription.metaTitle,
-            description: metaDescription.metaDescription,
-            images: [metaDescription.ogImage.imageUrl],
-        },
-        twitter: {
-            title: metaDescription.metaTitle,
-            description: metaDescription.metaDescription,
-            images: [metaDescription.ogImage.imageUrl],
-        },
-    }
-}
+// export async function generateMetadata(): Promise<Metadata> {
+// const data = await resourceService.getResource({
+//     id: env.NEXT_PUBLIC_RESOURCE_ID,
+// })
+// const { metaDescription, favicon } = data
+// return {
+//     icons: {
+//         icon: favicon,
+//         shortcut: favicon,
+//         apple: favicon,
+//     },
+//     robots: {
+//         index: metaDescription.isIndex,
+//         follow: metaDescription.isFollow,
+//         nocache: true,
+//         googleBot: {
+//             index: metaDescription.isIndex,
+//             follow: metaDescription.isFollow,
+//             noimageindex: false,
+//         },
+//     },
+//     title: metaDescription.metaTitle,
+//     description: metaDescription.metaDescription,
+//     keywords: metaDescription.keywords,
+//     openGraph: {
+//         title: metaDescription.metaTitle,
+//         description: metaDescription.metaDescription,
+//         images: [metaDescription.ogImage.imageUrl],
+//     },
+//     twitter: {
+//         title: metaDescription.metaTitle,
+//         description: metaDescription.metaDescription,
+//         images: [metaDescription.ogImage.imageUrl],
+//     },
+//     alternates: {
+//         canonical: metaDescription.canonical,
+//     },
+// }
+// }

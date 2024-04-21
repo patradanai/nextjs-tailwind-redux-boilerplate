@@ -25,6 +25,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.5.2",
         "@fortawesome/free-solid-svg-icons": "^6.5.2",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "@reduxjs/toolkit": "^2.2.3",
         "@t3-oss/env-nextjs": "^0.6.0",
         "@tanstack/react-query": "^5.29.0",
         "@tanstack/react-query-devtools": "^5.29.0",
@@ -60,8 +61,11 @@
         "react-datepicker": "^6.6.0",
         "react-dom": "^18.2.0",
         "react-loading-skeleton": "^3.4.0",
+        "react-redux": "^9.1.1",
         "react-select": "^5.8.0",
         "react-slick": "^0.30.2",
+        "redux-logger": "^3.0.6",
+        "redux-persist": "^6.0.0",
         "rehype-external-links": "^3.0.0",
         "rehype-slug": "^6.0.0",
         "remark-breaks": "^4.0.0",
@@ -75,10 +79,9 @@
         "tailwindcss": "3.4.3",
         "typescript": "5.4.4",
         "yup": "^1.4.0",
-        "zod": "^3.22.4",
-        "zustand": "^4.5.2"
-      },
-      "devDependencies": {
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
         "@tailwindcss/typography": "^0.5.12",
         "@testing-library/jest-dom": "^6.4.2",
         "@testing-library/react": "^14.2.2",
@@ -89,6 +92,7 @@
         "@types/react-csv": "^1.1.10",
         "@types/react-datepicker": "^6.2.0",
         "@types/react-slick": "^0.23.13",
+        "@types/redux-logger": "^3.0.13",
         "@typescript-eslint/eslint-plugin": "^7.5.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-check-file": "^2.7.1",
@@ -101,5 +105,5 @@
         "npm": "^10.5.1",
         "plop": "^4.0.1",
         "prettier": "3.2.5"
-      }
+    }
 }

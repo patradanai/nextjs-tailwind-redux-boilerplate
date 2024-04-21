@@ -3,8 +3,6 @@ import '@/libs/configs/fontawesome.config'
 
 import React from 'react'
 
-import DefaultLayout from '@/components/layouts/DefaultLayout/DefaultLayout'
-
 export default function RootLayout({
     children,
     params: { locale },
@@ -14,9 +12,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang={locale}>
-            <body>
-                <DefaultLayout>{children}</DefaultLayout>
-            </body>
+            <body>{children}</body>
         </html>
     )
 }
